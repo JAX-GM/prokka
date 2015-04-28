@@ -51,7 +51,7 @@ my $PROKKA_DOI = '10.1093/bioinformatics/btu153';
 my $DBDIR_DEFAULT = "$FindBin::RealBin/../db";
 my $HYPO = 'hypothetical protein';
 my $UNANN = 'unannotated protein';
-my $MAXCONTIGIDLEN_DEFAULT = 20;  # Genbank rule
+my $MAXCONTIGIDLEN_DEFAULT = 37;  # Genbank rule
 my @LOG; # buffer up log lines before we have log file ready
 
 # these should accept .faa on STDIN and write report to STDOUT
