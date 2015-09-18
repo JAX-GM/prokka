@@ -49,9 +49,11 @@ my $URL = 'https://github.com/tseemann/prokka';
 my $PROKKA_PMID = '24642063';
 my $PROKKA_DOI = '10.1093/bioinformatics/btu153';
 my $DBDIR_DEFAULT = "$FindBin::RealBin/../db";
+my $DBDIR = $DBDIR_DEFAULT;
 my $HYPO = 'hypothetical protein';
 my $UNANN = 'unannotated protein';
 my $MAXCONTIGIDLEN_DEFAULT = 37;  # Genbank rule
+my $MAXCONTIGIDLEN = $MAXCONTIGIDLEN_DEFAULT;
 my @LOG; # buffer up log lines before we have log file ready
 
 # these should accept .faa on STDIN and write report to STDOUT
@@ -214,10 +216,10 @@ sub check_all_tools {
 
 my(@Options, $quiet, $debug, $kingdom, $fast, $force, $outdir, $prefix, $cpus, $addgenes,
              $gcode, $gram, $gffver, $locustag, $increment, $mincontiglen, $evalue, $coverage,
-             $genus, $species, $strain, $plasmid, $MAXCONTIGIDLEN,
+             $genus, $species, $strain, $plasmid, $maxcontigidlen,
              $usegenus, $proteins, $hmms, $centre, $scaffolds,
              $rfam, $norrna, $notrna, $rnammer, $rawproduct,
-             $metagenome, $compliant, $listdb, $DBDIR, $citation);
+             $metagenome, $compliant, $listdb, $dbdir, $citation);
 setOptions();
 
 # . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
@@ -1496,7 +1498,7 @@ sub setOptions {
     {OPT=>"listdb",   VAR=>\&list_db,    DESC=>"List all configured databases"},
     {OPT=>"setupdb",  VAR=>\&setup_db,         DESC=>"Index all installed databases"},
     {OPT=>"cleandb",  VAR=>\&clean_db,         DESC=>"Remove all database indices"},
-    {OPT=>"DBDIR=s",  VAR=>\$DBDIR, DEFAULT=>$DBDIR_DEFAULT, DESC=>"Directory storing databases to use"},
+    {OPT=>"dbdir=s",  VAR=>\$DBDIR, DEFAULT=>$DBDIR_DEFAULT, DESC=>"Directory storing databases to use"},
     {OPT=>"depends",  VAR=>\&list_depends,     DESC=>"List all software dependencies"},
     'Outputs:',
     {OPT=>"outdir=s",  VAR=>\$outdir, DEFAULT=>'', DESC=>"Output folder [auto]"},
@@ -1527,7 +1529,7 @@ sub setOptions {
     {OPT=>"fast!",  VAR=>\$fast, DEFAULT=>0, DESC=>"Fast mode - skip CDS /product searching"},
     {OPT=>"cpus=i",  VAR=>\$cpus, DEFAULT=>8, DESC=>"Number of CPUs to use [0=all]"},
     {OPT=>"mincontiglen=i",  VAR=>\$mincontiglen, DEFAULT=>1, DESC=>"Minimum contig size [NCBI needs 200]"},
-    {OPT=>"MAXCONTIGIDLEN=i",  VAR=>\$MAXCONTIGIDLEN, DEFAULT=>$MAXCONTIGIDLEN_DEFAULT, DESC=>"Maximum contig id size [GenBank max is 20]"},
+    {OPT=>"maxcontigidlen=i",  VAR=>\$MAXCONTIGIDLEN, DEFAULT=>$MAXCONTIGIDLEN_DEFAULT, DESC=>"Maximum contig id size [GenBank max is 20]"},
     {OPT=>"evalue=f",  VAR=>\$evalue, DEFAULT=>1E-6, DESC=>"Similarity e-value cut-off"},
 #    {OPT=>"coverage=f",  VAR=>\$coverage, DEFAULT=>0, DESC=>"Similarity \%id cut-off (otherwise /pseudo)"},
     {OPT=>"rfam",  VAR=>\$rfam, DEFAULT=>0, DESC=>"Enable searching for ncRNAs with Infernal+Rfam (SLOW!)"},
